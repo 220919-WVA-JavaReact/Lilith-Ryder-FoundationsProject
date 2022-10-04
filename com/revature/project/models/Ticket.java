@@ -12,26 +12,28 @@ public class Ticket {
 
     private String amount;
 
+    private String description;
+
     private String status;
 
     private String approveName;
 
     private String approveTime;
 
-    public Ticket(int ticketNum, String submitName, String submitTime, String amount, String status, String approveName, String approveTime) {
+    public Ticket(int ticketNum, String submitId, String submitTime, String amount, String description, String status, String approveName, String approveTime) {
         this.ticketNum = ticketNum;
-        this.submitId = submitName;
+        this.submitId = submitId;
         this.submitTime = submitTime;
         this.amount = amount;
+        this.description = description;
         this.status = status;
         this.approveName = approveName;
         this.approveTime = approveTime;
     }
 
-    public Ticket(String submitName, String submitTime, String amount) {
-        this.submitId = submitName;
-        this.submitTime = submitTime;
+    public Ticket(String amount, String description) {
         this.amount = amount;
+        this.description = description;
     }
 
     public Ticket() {
@@ -42,12 +44,12 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return ticketNum == ticket.ticketNum && submitId.equals(ticket.submitId) && submitTime.equals(ticket.submitTime) && amount.equals(ticket.amount) && status.equals(ticket.status) && Objects.equals(approveName, ticket.approveName) && Objects.equals(approveTime, ticket.approveTime);
+        return ticketNum == ticket.ticketNum && submitId.equals(ticket.submitId) && submitTime.equals(ticket.submitTime) && amount.equals(ticket.amount) && description.equals(ticket.description) && status.equals(ticket.status) && Objects.equals(approveName, ticket.approveName) && Objects.equals(approveTime, ticket.approveTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticketNum, submitId, submitTime, amount, status, approveName, approveTime);
+        return Objects.hash(ticketNum, submitId, submitTime, amount, description, status, approveName, approveTime);
     }
 
     public int getTicketNum() {
@@ -58,12 +60,12 @@ public class Ticket {
         this.ticketNum = ticketNum;
     }
 
-    public String getSubmitName() {
+    public String getSubmitId() {
         return submitId;
     }
 
-    public void setSubmitName(String submitName) {
-        this.submitId = submitName;
+    public void setSubmitId(String submitId) {
+        this.submitId = submitId;
     }
 
     public String getSubmitTime() {
@@ -80,6 +82,14 @@ public class Ticket {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getStatus() {

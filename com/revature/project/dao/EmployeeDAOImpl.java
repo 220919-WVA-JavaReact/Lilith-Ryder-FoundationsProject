@@ -32,4 +32,10 @@ public class EmployeeDAOImpl implements EmployeeDAO {
 
         return null;
     }
+
+    @Override
+    public Employee createEmployee(String firstName, String lastName, String username, String password) {
+        System.out.println("Called the createEmployee method");
+        return null;
+    }
 }
