@@ -6,7 +6,7 @@ public class Ticket {
 
     private int ticketNum;
 
-    private String submitName;
+    private String submitId;
 
     private String submitTime;
 
@@ -20,7 +20,7 @@ public class Ticket {
 
     public Ticket(int ticketNum, String submitName, String submitTime, String amount, String status, String approveName, String approveTime) {
         this.ticketNum = ticketNum;
-        this.submitName = submitName;
+        this.submitId = submitName;
         this.submitTime = submitTime;
         this.amount = amount;
         this.status = status;
@@ -29,7 +29,7 @@ public class Ticket {
     }
 
     public Ticket(String submitName, String submitTime, String amount) {
-        this.submitName = submitName;
+        this.submitId = submitName;
         this.submitTime = submitTime;
         this.amount = amount;
     }
@@ -42,12 +42,12 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return ticketNum == ticket.ticketNum && submitName.equals(ticket.submitName) && submitTime.equals(ticket.submitTime) && amount.equals(ticket.amount) && status.equals(ticket.status) && Objects.equals(approveName, ticket.approveName) && Objects.equals(approveTime, ticket.approveTime);
+        return ticketNum == ticket.ticketNum && submitId.equals(ticket.submitId) && submitTime.equals(ticket.submitTime) && amount.equals(ticket.amount) && status.equals(ticket.status) && Objects.equals(approveName, ticket.approveName) && Objects.equals(approveTime, ticket.approveTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticketNum, submitName, submitTime, amount, status, approveName, approveTime);
+        return Objects.hash(ticketNum, submitId, submitTime, amount, status, approveName, approveTime);
     }
 
     public int getTicketNum() {
@@ -59,11 +59,11 @@ public class Ticket {
     }
 
     public String getSubmitName() {
-        return submitName;
+        return submitId;
     }
 
     public void setSubmitName(String submitName) {
-        this.submitName = submitName;
+        this.submitId = submitName;
     }
 
     public String getSubmitTime() {
