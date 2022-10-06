@@ -6,13 +6,11 @@ public class Ticket {
 
     private int ticketNum;
 
-    private String submitId;
+    private int submitId;
 
     private String submitTime;
 
     private String amount;
-
-    private String description;
 
     private String status;
 
@@ -20,7 +18,9 @@ public class Ticket {
 
     private String approveTime;
 
-    public Ticket(int ticketNum, String submitId, String submitTime, String amount, String description, String status, String approveName, String approveTime) {
+    private String description;
+
+    public Ticket(int ticketNum, int submitId, String submitTime, String amount, String status, String approveName, String approveTime, String description) {
         this.ticketNum = ticketNum;
         this.submitId = submitId;
         this.submitTime = submitTime;
@@ -44,12 +44,12 @@ public class Ticket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Ticket ticket = (Ticket) o;
-        return ticketNum == ticket.ticketNum && submitId.equals(ticket.submitId) && submitTime.equals(ticket.submitTime) && amount.equals(ticket.amount) && description.equals(ticket.description) && status.equals(ticket.status) && Objects.equals(approveName, ticket.approveName) && Objects.equals(approveTime, ticket.approveTime);
+        return ticketNum == ticket.ticketNum && submitId == ticket.submitId && submitTime.equals(ticket.submitTime) && amount.equals(ticket.amount) && description.equals(ticket.description) && status.equals(ticket.status) && Objects.equals(approveName, ticket.approveName) && Objects.equals(approveTime, ticket.approveTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ticketNum, submitId, submitTime, amount, description, status, approveName, approveTime);
+        return Objects.hash(ticketNum, submitId, submitTime, amount, status, approveName, approveTime, description);
     }
 
     public int getTicketNum() {
@@ -60,11 +60,11 @@ public class Ticket {
         this.ticketNum = ticketNum;
     }
 
-    public String getSubmitId() {
+    public int getSubmitId() {
         return submitId;
     }
 
-    public void setSubmitId(String submitId) {
+    public void setSubmitId(int submitId) {
         this.submitId = submitId;
     }
 
@@ -114,5 +114,19 @@ public class Ticket {
 
     public void setApproveTime(String approveTime) {
         this.approveTime = approveTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "ticketnum=" + ticketNum +
+                ", submitId='" + submitId + '\'' +
+                ", submitTime='" + submitTime + '\'' +
+                ", amount='" + amount + '\'' +
+                ", status='" + status + '\'' +
+                ", approveName='" + approveName + '\'' +
+                ", approveTime='" + approveTime + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

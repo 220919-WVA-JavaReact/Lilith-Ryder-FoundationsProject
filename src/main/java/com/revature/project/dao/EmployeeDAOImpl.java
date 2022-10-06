@@ -5,6 +5,7 @@ import com.revature.project.models.Employee;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.List;
 
 public class EmployeeDAOImpl implements EmployeeDAO {
 
@@ -36,6 +37,11 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     @Override
     public Employee createEmployee(String firstName, String lastName, String username, String password) {
         System.out.println("Called the createEmployee method");
+        return null;
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
         return null;
     }
 }

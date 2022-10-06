@@ -35,6 +35,9 @@ public class Employee {
     public Employee() {
     }
 
+    public Employee(int id, String firstName, String lastName, String username, String password) {
+    }
+
     public int getEmployeeId() {
         return employeeId;
     }
@@ -68,7 +71,7 @@ public class Employee {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
@@ -81,6 +84,18 @@ public class Employee {
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", first='" + firstName + '\'' +
+                ", last='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     @Override

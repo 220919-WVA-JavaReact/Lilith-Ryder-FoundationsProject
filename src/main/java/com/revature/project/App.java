@@ -29,12 +29,22 @@ public class App {
         }
 
         if (loggedInEmployee != null){
-            System.out.println("Press 1 to create a new ticket, 2 to view current/past tickets");
+            System.out.println("Press 1 to create a new ticket, 2 to view current/past tickets, 3 to view all current employees.");
             String subchoice = sc.nextLine();
 
             switch (subchoice){
                 case "1":
-                    ts.createTicket();
+                    ts.createTicket(loggedInEmployee);
+                    break;
+                case "2":
+                    ts.getTicketByEmployee(loggedInEmployee);
+                    break;
+                case "3":
+                    es.getAllEmployees();
+                    break;
+                default:
+                    System.out.println("Invalid Entry");
+
             }
         }
     }
