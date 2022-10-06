@@ -81,19 +81,20 @@ public class TicketDAOImpl implements TicketDAO{
 
             if ((rs = stmt.executeQuery()) != null) {
 
-                rs.next();
+                while (rs.next()) {
 
-                int id = rs.getInt("ticketnum");
-                int submitId = rs.getInt("submitid");
-                String submitTime = rs.getString("submittime");
-                String amount = rs.getString("amount");
-                String status = rs.getString("status");
-                String approveName = rs.getString("approvename");
-                String approveTime = rs.getString("approvetime");
-                String description = rs.getString("description");
+                    int id = rs.getInt("ticketnum");
+                    int submitId = rs.getInt("submitid");
+                    String submitTime = rs.getString("submittime");
+                    String amount = rs.getString("amount");
+                    String status = rs.getString("status");
+                    String approveName = rs.getString("approvename");
+                    String approveTime = rs.getString("approvetime");
+                    String description = rs.getString("description");
 
-                Ticket ticket = new Ticket(id, submitId, submitTime, amount, status, approveName, approveTime, description);
-                tickets.add(ticket);
+                    Ticket ticket = new Ticket(id, submitId, submitTime, amount, status, approveName, approveTime, description);
+                    tickets.add(ticket);
+                }
             }
 
         } catch (SQLException e) {
