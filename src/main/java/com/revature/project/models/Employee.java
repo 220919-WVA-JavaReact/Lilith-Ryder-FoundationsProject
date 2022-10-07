@@ -86,7 +86,7 @@ public class Employee {
         this.admin = admin;
     }
 
-
+// allows employee list items to be printed during GetEmployee method calls.
     @Override
     public String toString() {
         return "Employee{" +

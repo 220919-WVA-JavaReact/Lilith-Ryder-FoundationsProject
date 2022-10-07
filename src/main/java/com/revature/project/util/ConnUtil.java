@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
+// this class provides SQL database connectivity for calling and persisting data within the application.
 public class ConnUtil {
 
         private static Connection conn = null;

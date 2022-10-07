@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeDAOImplPostgres implements EmployeeDAO{
+
+    // codeblock to verify username and password input match database
     @Override
     public Employee getByUsername(String username) {
 
@@ -42,6 +44,7 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO{
         return employee;
     }
 
+    //codeblock for registering a new employee and persisting to database
     @Override
     public Employee createEmployee(String firstName, String lastName, String username, String password) {
 
@@ -83,6 +86,8 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO{
         return employee;
     }
 
+    // returns full list of current employees including password.
+    // later iterations of program will provide this info to administrators only.
     public List<Employee> getAllEmployees() {
         Connection conn = ConnUtil.getConn();
         List<Employee> employees = new ArrayList<>();

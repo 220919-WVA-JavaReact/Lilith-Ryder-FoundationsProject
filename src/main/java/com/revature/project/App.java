@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class App {
 
+    //initializes services to be used during operations.
     public static EmployeeService es = new EmployeeService();
 
     public static TicketService ts = new TicketService();
@@ -27,6 +28,8 @@ public class App {
         else if (choice.equals("2")) {
             loggedInEmployee = es.register();
         }
+
+        //verifies user logged in before allowing access to menu functions.
 
         if (loggedInEmployee != null){
             System.out.println("Press 1 to create a new ticket, 2 to view current/past tickets, 3 to view all current employees.");

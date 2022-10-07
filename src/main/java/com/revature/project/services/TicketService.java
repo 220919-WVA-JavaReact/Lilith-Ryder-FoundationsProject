@@ -10,10 +10,12 @@ import java.util.Scanner;
 
 public class TicketService {
 
+    // Allows user input and implements Ticket DAO
     Scanner sc = new Scanner(System.in);
 
     TicketDAO td = new TicketDAOImpl();
 
+    // creates a new ticket a persists to database
     public void createTicket(Employee employee){
         System.out.println("Enter reimbursement amount: ");
         String amount = sc.nextLine();
@@ -32,6 +34,7 @@ public class TicketService {
         }
     }
 
+    //allows current user to look at tickets they've submitted
     public void getTicketByEmployee(Employee employee){
         List<Ticket> ticketList = td.getTicketByEmployee(employee.getEmployeeId());
 

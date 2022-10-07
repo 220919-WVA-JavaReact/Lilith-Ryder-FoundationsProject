@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+
+// Methods in this class were ported to EmployeeDAOImplPostgres.java and are not currently implemented.
 public class EmployeeDAOImpl implements EmployeeDAO {
 
     @Override

@@ -8,8 +8,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class EmployeeService {
+
+    // Allows EmployeeService to utilize methods from the Employee DAO and take input from the console
     EmployeeDAO ed = new EmployeeDAOImplPostgres();
     Scanner sc = new Scanner(System.in);
+
+    // Employee login method
     public Employee login(){
 
         System.out.println("Please enter your username: ");
@@ -32,6 +36,8 @@ public class EmployeeService {
 
     }
 
+    // register a new employee and persist to database
+
     public Employee register() {
         System.out.println("Please enter your First Name");
         String firstName = sc.nextLine();
@@ -47,6 +53,7 @@ public class EmployeeService {
         return employee;
     }
 
+    // Prints the current full list of employees.
     public void getAllEmployees(){
         System.out.println("Return all employees in database.");
 

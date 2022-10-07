@@ -116,6 +116,7 @@ public class Ticket {
         this.approveTime = approveTime;
     }
 
+    // allows tickets to be printed as readable values during GetTicket method calls
     @Override
     public String toString() {
         return "Employee{" +

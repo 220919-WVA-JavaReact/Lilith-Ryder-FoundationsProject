@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TicketDAOImpl implements TicketDAO{
 
-
+// codeblock for ticket creation
     @Override
     public boolean createTicket(int employeeId, String amount, String description) {
         System.out.println("Called the create ticket method!");
@@ -49,12 +49,12 @@ public class TicketDAOImpl implements TicketDAO{
     public boolean createTicket(Employee employee, String amount, String description) {
         return false;
     }
-
-
     @Override
     public boolean createTicket(String amount, String description, int employeeId) {
         return false;
     }
+
+    // currently unimplemented method to return all tickets in database; admin function;
 
     @Override
     public List<Ticket> getAllTickets() {
@@ -62,6 +62,8 @@ public class TicketDAOImpl implements TicketDAO{
         return null;
     }
 
+
+    // codeblock for retrieving current user tickets from database
     @Override
     public List<Ticket> getTicketByEmployee(int employeeId) {
         System.out.println("Retrieving employee tickets...");
