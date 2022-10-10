@@ -16,21 +16,38 @@ public class TicketService {
     TicketDAO td = new TicketDAOImpl();
 
     // creates a new ticket a persists to database
-    public void createTicket(Employee employee){
-        System.out.println("Enter reimbursement amount: ");
-        String amount = sc.nextLine();
+    public void createTicket(Employee employee) {
+        while (true) {
 
-        System.out.println("Enter description: ");
-        String description = sc.nextLine();
+            System.out.println("Enter reimbursement amount: ");
+            String amount = sc.nextLine();
 
-        int employeeId = employee.getEmployeeId();
+            if (amount.equals("")) {
+                System.out.println("amount cannot be blank!");
+                return;
+            } else if (Double.parseDouble(amount) <= 0) {
+                System.out.println("amount must be a number greater than zero!");
+                return;
+            } else if (amount.equals("exit")) {
+                return;
+            }
 
-        boolean successful = td.createTicket(employeeId, amount, description);
+            System.out.println("Enter description: ");
+            String description = sc.nextLine();
 
-        if (successful){
-            System.out.println("Ticket submitted successfully!");
-        } else{
-            System.out.println("Something went wrong");
+            if (description.equals("")) {
+                System.out.println("Description cannot be blank!");
+            }
+
+            int employeeId = employee.getEmployeeId();
+
+            boolean successful = td.createTicket(employeeId, amount, description);
+
+            if (successful) {
+                System.out.println("Ticket submitted successfully!");
+            } else {
+                System.out.println("Something went wrong");
+            }
         }
     }
 
