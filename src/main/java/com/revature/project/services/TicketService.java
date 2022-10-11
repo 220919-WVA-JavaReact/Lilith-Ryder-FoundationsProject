@@ -29,6 +29,7 @@ public class TicketService {
                 System.out.println("amount must be a number greater than zero!");
                 return;
             } else if (amount.equals("exit")) {
+
                 return;
             }
 
@@ -37,6 +38,7 @@ public class TicketService {
 
             if (description.equals("")) {
                 System.out.println("Description cannot be blank!");
+                return;
             }
 
             int employeeId = employee.getEmployeeId();
