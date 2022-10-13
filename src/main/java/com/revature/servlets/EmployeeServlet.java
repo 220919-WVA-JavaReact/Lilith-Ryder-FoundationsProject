@@ -18,18 +18,20 @@ import java.time.LocalDateTime;
 public class EmployeeServlet extends HttpServlet {
     ObjectMapper mapper = new ObjectMapper();
     EmployeeService es = new EmployeeService();
+
+    public EmployeeServlet(ObjectMapper mapper) {
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         System.out.println("[LOG] - EmployeeServlet received a request at " + LocalDateTime.now());
-        System.out.println("[LOG] - Request URI: " + req.getRequestURI());
-        System.out.println("[LOG] - Request Method: " + req.getMethod());
-        System.out.println("[LOG] - Request Header, example: " + req.getHeader("example"));
 
         resp.setStatus(204);
         resp.setHeader("Content-type", "text/plain");
         resp.setHeader("example-response-header", "some-example-value");
         resp.getWriter().write("This is the response payload");
+        es.getAllEmployees();
     }
 
     @Override
@@ -40,14 +42,17 @@ public class EmployeeServlet extends HttpServlet {
 
         es.login(newEmployee.getUsername(), newEmployee.getPassword());
 
-        System.out.println(newEmployee);
-
         resp.setStatus(204);
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
+        System.out.println("[LOG] - EmployeeServlet received a request at " + LocalDateTime.now());
+        Employee newEmployee = mapper.readValue(req.getInputStream(), Employee.class);
+
+        es.register(newEmployee);
+
+        resp.setStatus(204);
     }
 
     @Override

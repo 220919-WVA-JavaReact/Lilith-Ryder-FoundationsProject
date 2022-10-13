@@ -46,4 +46,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     public List<Employee> getAllEmployees() {
         return null;
     }
+
+    @Override
+    public Employee createEmployee(Employee newEmployee) {
+        return null;
+    }
 }

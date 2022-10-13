@@ -11,4 +11,6 @@ public interface EmployeeDAO {
     Employee createEmployee(String firstName, String lastName, String username, String password);
 
     List<Employee> getAllEmployees();
+
+    Employee createEmployee(Employee newEmployee);
 }

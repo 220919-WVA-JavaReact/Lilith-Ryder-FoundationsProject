@@ -54,7 +54,7 @@ public class EmployeeService {
     }
 
     // Prints the current full list of employees.
-    public void getAllEmployees(){
+    public List<Employee> getAllEmployees(){
         System.out.println("Return all employees in database.");
 
         List<Employee> employeeList = ed.getAllEmployees();
@@ -62,6 +62,7 @@ public class EmployeeService {
         for(Employee employee : employeeList){
             System.out.println(employee);
         }
+        return employeeList;
     }
 
 
@@ -77,5 +78,11 @@ public class EmployeeService {
             System.out.println("Invalid login attempt.");
             return null;
         }
+    }
+
+    public Employee register(Employee newEmployee) {
+        Employee employee = ed.createEmployee(newEmployee);
+        System.out.println(newEmployee + "has been registered to the database!");
+        return employee;
     }
 }

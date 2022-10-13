@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDAOImplPostgres implements EmployeeDAO{
+public class EmployeeDAOImplPostgres implements EmployeeDAO {
 
     // codeblock to verify username and password input match database
     @Override
@@ -15,7 +15,7 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO{
 
         Employee employee = new Employee();
 
-        try (Connection conn = ConnUtil.getConn()){
+        try (Connection conn = ConnUtil.getConn()) {
 
             String sql = "SELECT * FROM employees WHERE username = ?";
 
@@ -25,7 +25,7 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO{
 
             ResultSet rs;
 
-            if ((rs = stmt.executeQuery()) != null){
+            if ((rs = stmt.executeQuery()) != null) {
 
                 rs.next();
 
@@ -50,7 +50,7 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO{
 
         Employee employee = new Employee();
 
-        try(Connection conn = ConnUtil.getConn()){
+        try (Connection conn = ConnUtil.getConn()) {
 
             String sql = "INSERT INTO employees (firstname, lastname, username, password) VALUES (?,?,?,?) RETURNING *";
 
@@ -64,7 +64,7 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO{
 
             ResultSet rs;
 
-            if ((rs = stmt.executeQuery()) != null){
+            if ((rs = stmt.executeQuery()) != null) {
 
                 rs.next();
                 rs.next();
@@ -99,8 +99,7 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO{
             ResultSet rs = stmt.executeQuery(sql);
 
 
-
-            while (rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("employeeId");
                 String firstname = rs.getString("firstname");
                 String lastname = rs.getString("lastname");
@@ -117,4 +116,49 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO{
         }
         return employees;
     }
+
+    @Override
+    public Employee createEmployee(Employee newEmployee) {
+
+        String firstName = newEmployee.getFirstName();
+        String lastName = newEmployee.getLastName();
+        String username = newEmployee.getUsername();
+        String password = newEmployee.getPassword();
+
+
+        try (Connection conn = ConnUtil.getConn()) {
+
+            String sql = "INSERT INTO employees (firstname, lastname, username, password) VALUES (?,?,?,?) RETURNING *";
+
+            PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, firstName);
+            stmt.setString(2, lastName);
+            stmt.setString(3, username);
+            stmt.setString(4, password);
+
+
+            ResultSet rs;
+
+            if ((rs = stmt.executeQuery()) != null) {
+
+                rs.next();
+
+                int id = rs.getInt("employeeId");
+                String receivedFirst = rs.getString("firstname");
+                String receivedLast = rs.getString("lastname");
+                String receivedUsername = rs.getString("username");
+                String receivedPassword = rs.getString("password");
+
+                newEmployee = new Employee(id, receivedFirst, receivedLast, receivedUsername, receivedPassword);
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Couldn't register user to the database");
+        }
+        return newEmployee;
+    }
 }
+

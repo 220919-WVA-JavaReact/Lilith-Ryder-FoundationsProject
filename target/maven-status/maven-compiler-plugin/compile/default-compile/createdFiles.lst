@@ -2,6 +2,7 @@ com\revature\project\services\TicketService.class
 com\revature\project\dao\TicketDAO.class
 com\revature\project\util\ConnUtil.class
 com\revature\project\models\Employee.class
+com\revature\servlets\TicketServlet.class
 com\revature\project\dao\EmployeeDAOImpl.class
 com\revature\servlets\SanityServlet.class
 com\revature\project\dao\TicketDAOImpl.class

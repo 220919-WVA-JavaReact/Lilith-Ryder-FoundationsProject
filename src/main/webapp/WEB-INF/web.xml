@@ -5,4 +5,7 @@
          version="3.1">
     <display-name>ERTS webapp</display-name>
 
+    <listener>
+        <listener-class>com.revature.util.ContextLoaderListener</listener-class>
+    </listener>
 </web-app>

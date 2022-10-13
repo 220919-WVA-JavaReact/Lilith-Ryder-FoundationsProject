@@ -4,6 +4,7 @@ import com.revature.project.models.Employee;
 import com.revature.project.services.EmployeeService;
 import com.revature.project.services.TicketService;
 
+import java.util.Properties;
 import java.util.Scanner;
 
 public class App {
