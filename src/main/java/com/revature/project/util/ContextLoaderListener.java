@@ -3,9 +3,9 @@ package com.revature.project.util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.project.dao.TicketDAO;
 import com.revature.project.dao.TicketDAOImpl;
-import com.revature.servlets.AuthServlet;
-import com.revature.servlets.EmployeeServlet;
-import com.revature.servlets.TicketServlet;
+import com.revature.project.servlets.AuthServlet;
+import com.revature.project.servlets.EmployeeServlet;
+import com.revature.project.servlets.TicketServlet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -33,7 +33,7 @@ public class ContextLoaderListener implements ServletContextListener {
         registeredServlet.setInitParameter("employee-servlet-key", "employee-servlet-value");
         registeredServlet.setInitParameter("another-param", "another-value");
 
-        context.addServlet("TicketServlet", ticketServlet).addMapping("/tickets/*");
+        context.addServlet("TicketServlet", ticketServlet).addMapping("/tickets");
         context.addServlet("AuthServlet", authServlet).addMapping("/auth");
     }
 

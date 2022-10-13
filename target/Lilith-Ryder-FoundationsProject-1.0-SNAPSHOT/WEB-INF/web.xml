@@ -5,4 +5,31 @@
          version="3.1">
     <display-name>ERTS webapp</display-name>
 
+    <context-param>
+        <param-name>test-context-key</param-name>
+        <param-value>test-context-value</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>com.revature.util.ContextLoaderListener</listener-class>
+    </listener>
+
+    <servlet>
+        <servlet-name>EmployeeServlet</servlet-name>
+        <servlet-class>com.revature.project.servlets.EmployeeServlet</servlet-class>
+
+        <init-param>
+            <param-name>test-init-key</param-name>
+            <param-value>test-init-value</param-value>
+        </init-param>
+
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EmployeeServlet</servlet-name>
+        <url-pattern>/employees</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
