@@ -65,4 +65,17 @@ public class EmployeeService {
     }
 
 
+    public Employee login(String username, String password) {
+        Employee employee = ed.getByUsername(username);
+
+        if(employee.getPassword().equals(password)){
+            System.out.println("Login successful!");
+            System.out.println(employee);
+
+            return employee;
+        } else{
+            System.out.println("Invalid login attempt.");
+            return null;
+        }
+    }
 }

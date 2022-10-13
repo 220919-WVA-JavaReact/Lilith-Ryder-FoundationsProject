@@ -24,15 +24,16 @@ public class ConnUtil {
                         e.printStackTrace();
                         return null;
                 }
-                String url = System.getenv("url");
-                String username = System.getenv("username");
-                String password = System.getenv("password");
+                String url = System.getProperty("DBurl");
+                String username = System.getProperty("DBusername");
+                String password = System.getProperty("DBpassword");
 
 
                 try {
+                        Class.forName("org.postgresql.Driver");
                         conn = DriverManager.getConnection(url, username, password);
                         System.out.println("Established Connection to Database!");
-                } catch (SQLException e) {
+                } catch (SQLException | ClassNotFoundException e) {
                         System.out.println("Could not establish connection");
                         e.printStackTrace();
                 }
