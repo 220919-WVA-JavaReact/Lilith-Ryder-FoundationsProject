@@ -31,6 +31,7 @@ public class EmployeeServlet extends HttpServlet {
         resp.setHeader("Content-type", "text/plain");
         resp.setHeader("example-response-header", "some-example-value");
         resp.getWriter().write("This is the response payload");
+
         es.getAllEmployees();
     }
 
