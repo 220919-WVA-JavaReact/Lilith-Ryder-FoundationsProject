@@ -36,10 +36,10 @@ public class TicketServlet extends HttpServlet {
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Employee current = mapper.readValue(req.getInputStream(), Employee.class);
         Ticket newTicket = mapper.readValue(req.getInputStream(), Ticket.class);
-        ts.createTicket(current.getEmployeeId(), newTicket);
+        ts.createTicket(Integer.parseInt(req.getHeader("employeeId")), newTicket);
         resp.setStatus(204);
+        ;
     }
 
     @Override
