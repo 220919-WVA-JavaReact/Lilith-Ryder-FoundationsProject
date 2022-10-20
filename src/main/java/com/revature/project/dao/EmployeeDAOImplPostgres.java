@@ -81,7 +81,8 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Couldn't register user to the database");
+            System.out.println("[LOG] - Couldn't register user to the database.");
+            employee = null;
         }
         return employee;
     }
@@ -157,7 +158,8 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Couldn't register user to the database");
+            System.out.println("[LOG] - Couldn't register user to the database");
+            newEmployee = null;
         }
         return newEmployee;
     }

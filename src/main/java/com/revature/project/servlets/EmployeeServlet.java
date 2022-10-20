@@ -48,27 +48,40 @@ public class EmployeeServlet extends HttpServlet {
             case "Login":
                 Employee employee = es.login(newEmployee.getUsername(), newEmployee.getPassword());
 
+                if (employee == null) {
+                    System.out.println("[LOG] - Invalid login attempt.");
+                    resp.setStatus(403);
+                    resp.getWriter().write("Invalid login attempt.");
+                }
+
                 if (employee.getAdmin()) {
                     session.setAttribute("Auth-employee", employee);
                     session.setAttribute("Admin", true);
                     System.out.println("[LOG] - Logged in as manager role.");
                     resp.getWriter().write("Logged in as manager role.");
-                    resp.setStatus(204);
+                    resp.setStatus(200);
                     return;
                 } else if (!employee.getAdmin()){
                     session.setAttribute("Auth-employee", employee);
                     session.setAttribute("Admin", false);
                     System.out.println("[LOG] - Logged in as employee role.");
                     resp.getWriter().write("Logged in as employee role.");
-                    resp.setStatus(204);
-                    return;
-                } else {
-                    resp.setStatus(403);
-                    resp.getWriter().write("invalid login attempt");
+                    resp.setStatus(200);
                     return;
                 }
+
             case "Register":
-                        es.register(newEmployee);
+                    es.register(newEmployee);
+
+                    if ((es.register(newEmployee)) != null) {
+                    System.out.println("[LOG] - " + newEmployee.getFirstName() + " " + newEmployee.getLastName() + " registered successfully!");
+                    resp.getWriter().write(newEmployee.getFirstName() + " " + newEmployee.getLastName() + " registered successfully!");
+                    resp.setStatus(201); }
+                    else {
+                        System.out.println("[LOG] - Username unavailable!");
+                        resp.getWriter().write("Username unavailable!");
+                        resp.setStatus(403);
+                    }
         }
     }
 
@@ -87,10 +100,11 @@ public class EmployeeServlet extends HttpServlet {
 
         if(session != null){
 
-            System.out.println("Successfully logged out.");
+            System.out.println("[LOG] - Successfully logged out.");
+            resp.getWriter().write("Successfully logged out.");
             session.invalidate();
         }
 
-        resp.setStatus(204);
+        resp.setStatus(200);
     }
 }

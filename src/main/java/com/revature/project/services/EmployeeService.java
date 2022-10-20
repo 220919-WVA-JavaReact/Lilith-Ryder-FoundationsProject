@@ -5,6 +5,7 @@ import com.revature.project.dao.EmployeeDAOImplPostgres;
 import com.revature.project.models.Employee;
 
 import javax.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -80,7 +81,11 @@ public class EmployeeService {
     }
 
     public Employee register(Employee newEmployee) {
-        Employee employee = ed.createEmployee(newEmployee);
-         return employee;
+            Employee employee = ed.createEmployee(newEmployee);
+            if (employee == null) {
+                return null;
+            } else {
+                return employee;
+            }
     }
 }

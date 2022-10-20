@@ -5,6 +5,7 @@ import com.revature.project.dao.TicketDAOImpl;
 import com.revature.project.models.Employee;
 import com.revature.project.models.Ticket;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Scanner;
 
@@ -54,37 +55,36 @@ public class TicketService {
     }
 
     //allows current user to look at tickets they've submitted
-    public void getTicketByEmployee(Employee employee) {
+    public List<Ticket> getTicketByEmployee(Employee employee) {
         List<Ticket> ticketList = td.getTicketByEmployee(employee.getEmployeeId());
 
         for (Ticket ticket : ticketList) {
             System.out.println(ticket);
-        }
+        } return ticketList;
     }
 
-    public void getAllPending() {
+    public List<Ticket> getAllPending() {
 
         List<Ticket> ticketList = td.getAllPending();
 
         for (Ticket ticket : ticketList) {
             System.out.println(ticket);
-        }
+        } return ticketList;
     }
 
-    public void createTicket(int employeeId, Ticket newTicket) {
+    public Ticket createTicket(int employeeId, Ticket newTicket) throws NullPointerException {
 
-
-            if (newTicket.getAmount().equals("")) {
-                System.out.println("amount cannot be blank!");
-                return;
+            if (newTicket.getAmount().equals("") || newTicket.getAmount() == null) {
+                System.out.println("[LOG] - amount cannot be blank!");
+                throw new NullPointerException("Amount cannot be blank!");
             } else if (Double.parseDouble(newTicket.getAmount()) <= 0) {
-                System.out.println("amount must be a number greater than zero!");
-                return;
+                System.out.println("[LOG] - Amount must be a number greater than zero!");
+                throw new NullPointerException("Amount must be a number greater than zero!");
             }
 
-            if (newTicket.getDescription().equals("")) {
-                System.out.println("Description cannot be blank!");
-                return;
+            if (newTicket.getDescription().equals("") || newTicket.getDescription() == null) {
+                System.out.println("[LOG] - Description cannot be blank!");
+                throw new NullPointerException("Description cannot be blank!");
             }
 
             boolean successful = td.createTicket(employeeId, newTicket.getAmount(), newTicket.getDescription());
@@ -93,7 +93,8 @@ public class TicketService {
                 System.out.println("Ticket submitted successfully!");
             } else {
                 System.out.println("Something went wrong");
-            }
+            } return newTicket;
+
         }
 
     public void updateTicket(Ticket ticket) {
@@ -104,20 +105,20 @@ public class TicketService {
         return ticket;
     }
 
-    public void getAllTickets() {
+    public List<Ticket> getAllTickets() {
         List<Ticket> ticketList = td.getAllTickets();
 
         for (Ticket ticket : ticketList) {
-            System.out.println(ticket);
-        }
+        System.out.println(ticket);
+        } return ticketList;
     }
 
-    public void getPastTicketByEmployee(Employee employee) {
+    public List<Ticket> getPastTicketByEmployee(Employee employee) {
         List<Ticket> ticketList = td.getPastTicketByEmployee(employee.getEmployeeId());
 
         for (Ticket ticket : ticketList) {
             System.out.println(ticket);
-        }
+        } return ticketList;
     }
 }
 

@@ -14,7 +14,6 @@ public class TicketDAOImpl implements TicketDAO {
     // codeblock for ticket creation
     @Override
     public boolean createTicket(int employeeId, String amount, String description) {
-        System.out.println("Called the create ticket method!");
 
         Ticket ticket = new Ticket();
 
@@ -66,9 +65,11 @@ public class TicketDAOImpl implements TicketDAO {
         List<Ticket> tickets = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM tickets";
+            String sql = "SELECT * FROM tickets WHERE status != ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1,"Pending");
 
             ResultSet rs;
 
@@ -103,9 +104,11 @@ public class TicketDAOImpl implements TicketDAO {
         List<Ticket> tickets = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM tickets WHERE status = Pending";
+            String sql = "SELECT * FROM tickets WHERE status = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
+
+            stmt.setString(1, "Pending");
 
 
             ResultSet rs;
@@ -141,11 +144,12 @@ public class TicketDAOImpl implements TicketDAO {
 
         try {
 
-            String sql = "SELECT * FROM tickets WHERE submitid = ? AND status = Pending";
+            String sql = "SELECT * FROM tickets WHERE submitid = ? AND status = ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setInt(1, employeeId);
+            stmt.setString(2, "Pending");
 
             ResultSet rs;
 
@@ -181,11 +185,12 @@ public class TicketDAOImpl implements TicketDAO {
 
         try {
 
-            String sql = "SELECT * FROM tickets WHERE submitid = ? AND status <> Pending";
+            String sql = "SELECT * FROM tickets WHERE submitid = ? AND status != ?";
 
             PreparedStatement stmt = conn.prepareStatement(sql);
 
             stmt.setInt(1, employeeId);
+            stmt.setString(2,"Pending");
 
             ResultSet rs;
 
