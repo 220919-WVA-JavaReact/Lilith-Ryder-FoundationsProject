@@ -62,6 +62,15 @@ public class TicketService {
         }
     }
 
+    public void getAllPending() {
+
+        List<Ticket> ticketList = td.getAllPending();
+
+        for (Ticket ticket : ticketList) {
+            System.out.println(ticket);
+        }
+    }
+
     public void createTicket(int employeeId, Ticket newTicket) {
 
 
@@ -87,4 +96,30 @@ public class TicketService {
             }
         }
 
+    public void updateTicket(Ticket ticket) {
     }
+
+    public Ticket updateTicket(int ticketNum, String status, Employee employee) {
+       Ticket ticket =  td.updateTicket(ticketNum, status, employee);
+        return ticket;
+    }
+
+    public void getAllTickets() {
+        List<Ticket> ticketList = td.getAllTickets();
+
+        for (Ticket ticket : ticketList) {
+            System.out.println(ticket);
+        }
+    }
+
+    public void getPastTicketByEmployee(Employee employee) {
+        List<Ticket> ticketList = td.getPastTicketByEmployee(employee.getEmployeeId());
+
+        for (Ticket ticket : ticketList) {
+            System.out.println(ticket);
+        }
+    }
+}
+
+
+

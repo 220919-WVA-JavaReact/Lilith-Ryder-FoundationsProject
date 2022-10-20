@@ -5,14 +5,13 @@ import com.revature.project.models.Employee;
 import com.revature.project.services.EmployeeService;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.time.LocalDateTime;
+
 
 
 public class EmployeeServlet extends HttpServlet {
@@ -21,6 +20,7 @@ public class EmployeeServlet extends HttpServlet {
 
     public EmployeeServlet(ObjectMapper mapper) {
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -41,9 +41,35 @@ public class EmployeeServlet extends HttpServlet {
         System.out.println("[LOG] - EmployeeServlet received a request at " + LocalDateTime.now());
         Employee newEmployee = mapper.readValue(req.getInputStream(), Employee.class);
 
-        es.login(newEmployee.getUsername(), newEmployee.getPassword());
+        HttpSession session = req.getSession();
+        //session.setAttribute("Auth-employee", newEmployee);
 
-        resp.setStatus(204);
+        switch (req.getHeader("Type")) {
+            case "Login":
+                Employee employee = es.login(newEmployee.getUsername(), newEmployee.getPassword());
+
+                if (employee.getAdmin()) {
+                    session.setAttribute("Auth-employee", employee);
+                    session.setAttribute("Admin", true);
+                    System.out.println("[LOG] - Logged in as manager role.");
+                    resp.getWriter().write("Logged in as manager role.");
+                    resp.setStatus(204);
+                    return;
+                } else if (!employee.getAdmin()){
+                    session.setAttribute("Auth-employee", employee);
+                    session.setAttribute("Admin", false);
+                    System.out.println("[LOG] - Logged in as employee role.");
+                    resp.getWriter().write("Logged in as employee role.");
+                    resp.setStatus(204);
+                    return;
+                } else {
+                    resp.setStatus(403);
+                    resp.getWriter().write("invalid login attempt");
+                    return;
+                }
+            case "Register":
+                        es.register(newEmployee);
+        }
     }
 
     @Override
@@ -51,13 +77,20 @@ public class EmployeeServlet extends HttpServlet {
         System.out.println("[LOG] - EmployeeServlet received a request at " + LocalDateTime.now());
         Employee newEmployee = mapper.readValue(req.getInputStream(), Employee.class);
 
-        es.register(newEmployee);
 
-        resp.setStatus(204);
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
+        System.out.println("[LOG] - EmployeeServlet received a request at " + LocalDateTime.now());
+        HttpSession session = req.getSession(false);
+
+        if(session != null){
+
+            System.out.println("Successfully logged out.");
+            session.invalidate();
+        }
+
+        resp.setStatus(204);
     }
 }

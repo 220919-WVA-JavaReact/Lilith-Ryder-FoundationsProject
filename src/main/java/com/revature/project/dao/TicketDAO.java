@@ -17,12 +17,12 @@ public interface TicketDAO {
 
     List<Ticket> getAllTickets();
 
+    List<Ticket> getAllPending();
+
     List<Ticket> getTicketByEmployee(int employeeId);
 
-    boolean approveTicket(Ticket ticket);
 
-    boolean denyTicket(Ticket ticket);
+    Ticket updateTicket(int ticketNum, String status, Employee employee);
 
-
-
+    List<Ticket> getPastTicketByEmployee(int employeeId);
 }

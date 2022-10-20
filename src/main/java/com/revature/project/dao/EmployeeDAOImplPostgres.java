@@ -151,6 +151,7 @@ public class EmployeeDAOImplPostgres implements EmployeeDAO {
                 String receivedPassword = rs.getString("password");
 
                 newEmployee = new Employee(id, receivedFirst, receivedLast, receivedUsername, receivedPassword);
+                System.out.println(receivedFirst + " " + receivedLast + " has registered successfully!");
             }
 
 

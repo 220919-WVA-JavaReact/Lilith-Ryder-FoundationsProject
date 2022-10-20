@@ -4,6 +4,7 @@ import com.revature.project.dao.EmployeeDAO;
 import com.revature.project.dao.EmployeeDAOImplPostgres;
 import com.revature.project.models.Employee;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Scanner;
 
@@ -71,8 +72,6 @@ public class EmployeeService {
 
         if(employee.getPassword().equals(password)){
             System.out.println("Login successful!");
-            System.out.println(employee);
-
             return employee;
         } else{
             System.out.println("Invalid login attempt.");
@@ -82,7 +81,6 @@ public class EmployeeService {
 
     public Employee register(Employee newEmployee) {
         Employee employee = ed.createEmployee(newEmployee);
-        System.out.println(newEmployee + "has been registered to the database!");
-        return employee;
+         return employee;
     }
 }
